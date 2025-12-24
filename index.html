@@ -315,6 +315,7 @@
             if (checkWin()) {
                 gameOver = true;
                 statusElement.textContent = "You Win!";
+                renderBoard();
                 return;
             }
             
