@@ -1,4 +1,23 @@
 # INT-Minesweeper
-## Minesweeper but in Hensel notation
+Minesweeper but in Hensel notation
 
-This Minesweeper remake functions exactly the same as the ordinary Minesweeper, but squares (cells) display the letter that matches
+This Minesweeper remake functions exactly the same as the ordinary Minesweeper, but squares (cells) display the letter in Hensel notation.
+
+## What's Hensel notation?
+Hensel notation
++---+-----------------------------------+
+|   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
++---+---+---+---+---+---+---+---+---+---+
+| c | - |
+| e | - |
+| a | - |
+| i | - |
+| k | - |
+| n | - |
+| j | - |
+| q | - |
+| r | - |
+| y | - |
+| t | - |
+| w | - |
+| z | - |
