@@ -4,114 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INT Minesweeper</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Courier New', monospace;
-        }
-        
-        body {
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        
-        .game-container {
-            background-color: #c0c0c0;
-            border: 2px solid #808080;
-            border-radius: 5px;
-            padding: 15px;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-            max-width: 100%;
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 5px 10px;
-            background-color: #c0c0c0;
-            border: 2px inset #c0c0c0;
-        }
-        
-        .controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .controls input {
-            width: 60px;
-            padding: 5px;
-        }
-        
-        button {
-            background-color: #c0c0c0;
-            border: 2px outset #c0c0c0;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        button:hover {
-            background-color: #d0d0d0;
-        }
-        
-        .game-board {
-            display: grid;
-            gap: 1px;
-            background-color: #808080;
-            border: 2px inset #c0c0c0;
-            margin-bottom: 15px;
-            overflow: auto;
-            max-width: 100%;
-            justify-content: center
-        }
-        
-        .cell {
-            width: 30px;
-            height: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #c0c0c0;
-            border: 2px outset #c0c0c0;
-            font-weight: bold;
-            cursor: pointer;
-            user-select: none;
-        }
-        
-        .cell.revealed {
-            border: 1px solid #808080;
-            background-color: #e0e0e0;
-        }
-        
-        .cell.mine {
-            background-color: #ff0000;
-        }
-        
-        .cell.flagged::after {
-            content: "🚩";
-        }
-        
-        .status {
-            text-align: center;
-            font-weight: bold;
-            margin-top: 10px;
-            height: 24px;
-        }
-        
-        .pixel-font {
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
     <div class="game-container">
@@ -284,6 +177,7 @@
 
         // Reveal a cell
         function revealCell(row, col) {
+            statusElement.textContent = ""
             if (gameOver || revealed[row][col] || flagged[row][col]) {
                 return;
             }
