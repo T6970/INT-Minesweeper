@@ -275,7 +275,9 @@ function renderBoard() {
             // Add click events
             cell.addEventListener('click', () => {
                 revealCell(row, col);
-                statusElement.textcontent = "";
+                if (!gameOver) {
+                    statusElement.textcontent = "";
+                };
             });
             
             cell.addEventListener('contextmenu', (e) => {
