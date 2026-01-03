@@ -61,6 +61,10 @@ button:hover {
     background-color: #d0d0d0;
 }
 
+button:active {
+    border: 2px inset #c0c0c0
+}
+
 .game-board {
     display: grid;
     gap: 1px;
@@ -90,12 +94,33 @@ button:hover {
     background-color: #e0e0e0;
 }
 
+.cell:active {
+    background-color: #808080;
+    border: 2px solid #808080;
+}
+
+.cell.revealed:active {
+    border: 2px inset #808080;
+    background-color: #e0e0e0;
+}
+
 .cell.mine {
+    background-color: #ff0000;
+    border: 2px outset #c0c0c0;
+}
+
+.cell.mine:active {
+    border: 2px outset #c0c0c0;
     background-color: #ff0000;
 }
 
 .cell.flagged::after {
     content: "🚩";
+}
+
+.cell.flagged:active {
+    background-color: #c0c0c0;
+    border: 2px outset #c0c0c0;
 }
 
 .status {
