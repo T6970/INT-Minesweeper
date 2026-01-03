@@ -51,6 +51,7 @@ const widthInput = document.getElementById('width');
 const heightInput = document.getElementById('height');
 const minesInput = document.getElementById('mines');
 const newGameButton = document.getElementById('new-game');
+const gameContainer = document.getElementById('container')
 
 // Initialize the game
 function initGame() {
@@ -82,6 +83,9 @@ function initGame() {
     
     // Render the board
     renderBoard();
+
+    // resize the game board
+    gameContainer.style.width = `${width * 30 + 48}px`
 }
 
 // Place mines after first click to ensure first cell is safe
