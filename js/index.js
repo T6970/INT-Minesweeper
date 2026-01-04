@@ -46,7 +46,6 @@ let mines = 15;
 
 // DOM elements
 const boardElement = document.getElementById('board');
-const statusElement = document.getElementById('status');
 const widthInput = document.getElementById('width');
 const heightInput = document.getElementById('height');
 const minesInput = document.getElementById('mines');
@@ -78,13 +77,10 @@ function initGame() {
     gameOver = false;
     firstClick = true;
     
-    // Update status
-    statusElement.textContent = "Click to start";
-    
     // Render the board
     renderBoard();
 
-    // resize the game board
+    // Resize the game board
     gameContainer.style.width = `${width * 30 + 48}px`
 }
 
@@ -147,7 +143,6 @@ function calculateRuleIndex(row, col) {
 
 // Reveal a cell
 function revealCell(row, col) {
-    statusElement.textContent = ""
     if (gameOver || revealed[row][col] || flagged[row][col]) {
         return;
     }
@@ -165,7 +160,6 @@ function revealCell(row, col) {
     // Check if it's a mine
     if (grid[row][col] === -1) {
         gameOver = true;
-        statusElement.textContent = "Game Over!";
         revealAllMines();
         return;
     }
@@ -178,7 +172,6 @@ function revealCell(row, col) {
     // Check for win
     if (checkWin()) {
         gameOver = true;
-        statusElement.textContent = "You Win!";
         renderBoard();
         return;
     }
@@ -279,9 +272,6 @@ function renderBoard() {
             // Add click events
             cell.addEventListener('click', () => {
                 revealCell(row, col);
-                if (!gameOver) {
-                    statusElement.textcontent = "";
-                };
             });
             
             cell.addEventListener('contextmenu', (e) => {
