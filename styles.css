@@ -70,8 +70,7 @@ button:active {
     gap: 1px;
     background-color: #808080;
     border: 2px inset #c0c0c0;
-    margin-bottom: 15px;
-    overflow: auto;
+    overflow: visible;
     max-width: 100%;
     justify-content: center
 }
@@ -121,13 +120,6 @@ button:active {
 .cell.flagged:active {
     background-color: #c0c0c0;
     border: 2px outset #c0c0c0;
-}
-
-.status {
-    text-align: center;
-    font-weight: bold;
-    margin-top: 10px;
-    height: 24px;
 }
 
 .pixel-font {
