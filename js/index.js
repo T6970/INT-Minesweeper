@@ -284,8 +284,10 @@ function renderBoard() {
                 revealCell(row, col);
             });
 
-            cell.addEventListener('mousedown', () => {
-                chgStatus("😮")
+            cell.addEventListener('mousedown', (e) => {
+                if (e.button === 0) {
+                    chgStatus("😮")
+                }
             });
 
             cell.addEventListener('mouseup', () => {
