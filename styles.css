@@ -126,3 +126,10 @@ button:active {
     font-family: 'Courier New', monospace;
     font-weight: bold;
 }
+
+#smiley {
+    width: 45px;
+    height: 45px;
+    font-size: 30px;
+    padding-left: 2px;
+}

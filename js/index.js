@@ -49,8 +49,8 @@ const boardElement = document.getElementById('board');
 const widthInput = document.getElementById('width');
 const heightInput = document.getElementById('height');
 const minesInput = document.getElementById('mines');
-const newGameButton = document.getElementById('new-game');
-const gameContainer = document.getElementById('container')
+const smiley = document.getElementById('smiley');
+const gameContainer = document.getElementById('container');
 
 // Initialize the game
 function initGame() {
@@ -76,6 +76,7 @@ function initGame() {
     flagged = Array(height).fill().map(() => Array(width).fill(false));
     gameOver = false;
     firstClick = true;
+    chgStatus("🙂")
     
     // Render the board
     renderBoard();
@@ -141,6 +142,13 @@ function calculateRuleIndex(row, col) {
     return index;
 }
 
+// Change expression of status (smiley)
+function chgStatus(expr, override) {
+    if (!gameOver ^ override) {
+        smiley.innerHTML = expr
+    }
+}
+
 // Reveal a cell
 function revealCell(row, col) {
     if (gameOver || revealed[row][col] || flagged[row][col]) {
@@ -171,6 +179,7 @@ function revealCell(row, col) {
     
     // Check for win
     if (checkWin()) {
+        chgStatus("😎")
         gameOver = true;
         renderBoard();
         return;
@@ -236,6 +245,7 @@ function revealAllMines() {
         }
     }
     renderBoard();
+    chgStatus("😵", true)
 }
 
 // Render the game board
@@ -273,6 +283,14 @@ function renderBoard() {
             cell.addEventListener('click', () => {
                 revealCell(row, col);
             });
+
+            cell.addEventListener('mousedown', () => {
+                chgStatus("😮")
+            });
+
+            cell.addEventListener('mouseup', () => {
+                chgStatus("🙂")
+            })
             
             cell.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
@@ -285,7 +303,7 @@ function renderBoard() {
 }
 
 // Event listeners
-newGameButton.addEventListener('click', initGame);
+smiley.addEventListener('click', initGame);
 
 // Initialize the game
 initGame();
