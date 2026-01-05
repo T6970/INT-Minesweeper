@@ -57,10 +57,6 @@ button {
     font-weight: bold;
 }
 
-button:hover {
-    background-color: #d0d0d0;
-}
-
 button:active {
     border: 2px inset #c0c0c0
 }
@@ -132,4 +128,5 @@ button:active {
     height: 45px;
     font-size: 30px;
     padding-left: 2px;
+    margin: 10px auto;
 }
