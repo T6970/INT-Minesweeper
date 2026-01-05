@@ -40,7 +40,6 @@ input {
 .controls {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
     flex-wrap: wrap;
 }
 
@@ -121,6 +120,17 @@ button:active {
 .pixel-font {
     font-family: 'Courier New', monospace;
     font-weight: bold;
+}
+
+.display {
+    width: 75px;
+    height: 45px;
+    background-color: #404040;
+    border: 2px inset #404040;
+    padding: 5px 10px;
+    margin: 10px auto;
+    font-size: 30px;
+    color: #ff0000;
 }
 
 #smiley {
