@@ -43,6 +43,9 @@ let firstClick = true
 let width = 10
 let height = 10
 let mines = 15
+let time = 0
+let tick = false
+let timer
 
 // DOM elements
 const boardElement = document.getElementById('board')
@@ -51,12 +54,14 @@ const heightInput = document.getElementById('height')
 const minesInput = document.getElementById('mines')
 const smiley = document.getElementById('smiley')
 const gameContainer = document.getElementById('container')
+const timeDisplay = document.getElementById('time')
 
 // Initialize the game
 function initGame() {
     width = parseInt(widthInput.value) || 10
     height = parseInt(heightInput.value) || 10
     mines = parseInt(minesInput.value) || 15
+
     
     // Validate input
     if (width < 1) width = 1
@@ -76,6 +81,10 @@ function initGame() {
     flagged = Array(height).fill().map(() => Array(width).fill(false))
     gameOver = false
     firstClick = true
+    time = 0
+    tick = false
+    timeDisplay.innerHTML = "000"
+    clearInterval(timer)
     chgStatus("🙂")
     
     // Render the board
@@ -158,6 +167,11 @@ function revealCell(row, col) {
     // First click - place mines and ensure safety
     if (firstClick) {
         firstClick = false
+        tick = true
+        timer = setInterval(() => {
+            time++
+            timeDisplay.innerHTML = "0".repeat(3 - `${time}`.length) + time
+        }, 1000)
         placeMines(row, col)
         // Recalculate the rule index for the first cell after mines are placed
         grid[row][col] = calculateRuleIndex(row, col)
@@ -181,6 +195,7 @@ function revealCell(row, col) {
     if (checkWin()) {
         chgStatus("😎")
         gameOver = true
+        clearInterval(timer)
         renderBoard()
         return
     }
@@ -244,6 +259,7 @@ function revealAllMines() {
             }
         }
     }
+    clearInterval(timer)
     renderBoard()
     chgStatus("😵", true)
 }
