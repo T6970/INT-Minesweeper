@@ -57,6 +57,12 @@ const smiley = document.getElementById('smiley')
 const gameContainer = document.getElementById('container')
 const timeDisplay = document.getElementById('time')
 const mineDisplay = document.getElementById('mine-count')
+const customGame = document.getElementById('custom-game')
+
+// Initialize UI
+window.onload = () => {
+    customGame.style.display = "none"
+}
 
 // Initialize the game
 function initGame() {

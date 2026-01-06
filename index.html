@@ -9,21 +9,8 @@
 <body>
     <div class="game-container" id="container">
         <div class="header">
-            <div class="controls">
-                <div>
-                    <label>Width: </label>
-                    <input type="number" id="width" min="1" value="8">
-                </div>
-                <div>
-                    <label>Height:</label>
-                    <input type="number" id="height" min="1" value="8">
-                </div>
-                <div>
-                    <label>Mines: </label>
-                    <input type="number" id="mines" min="1" value="10">
-                </div>
-                
-            </div>
+            <button id="game">Game</button>
+            <button id="help">Help</button>
         </div>
         <div class="controls">
             <div class="display" id="time">000</div>
@@ -32,6 +19,22 @@
         </div>
         <div class="game-board" id="board"></div>
         
+    </div>
+    <div class="game-container" id="custom-game">
+        <div class="controls">
+            <div>
+                <label>Width: </label>
+                <input type="number" id="width" min="1" value="8">
+            </div>
+            <div>
+                <label>Height:</label>
+                <input type="number" id="height" min="1" value="8">
+            </div>
+            <div>
+                <label>Mines: </label>
+                <input type="number" id="mines" min="1" value="10">
+            </div>        
+        </div>
     </div>
 
     <script src="js/index.js" type="module"></script>

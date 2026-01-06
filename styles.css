@@ -29,12 +29,10 @@ input {
 
 .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    padding: 5px 10px;
+    align-items: left;
+    justify-content: left;
+    padding: 0px 0px 0px 0px;
     background-color: #c0c0c0;
-    border: 2px inset #c0c0c0;
 }
 
 .controls {
