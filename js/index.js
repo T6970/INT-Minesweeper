@@ -32,54 +32,54 @@ const rulekeys = [
     "r", "n", "c", "c", "q", "k", "n", "c",
     "a", "a", "n", "a", "j", "e", "k", "e",
     "i", "a", "c", "c", "a", "e", "c", "8"
-];
+]
 
 // Game state variables
-let grid = [];
-let revealed = [];
-let flagged = [];
-let gameOver = false;
-let firstClick = true;
-let width = 10;
-let height = 10;
-let mines = 15;
+let grid = []
+let revealed = []
+let flagged = []
+let gameOver = false
+let firstClick = true
+let width = 10
+let height = 10
+let mines = 15
 
 // DOM elements
-const boardElement = document.getElementById('board');
-const widthInput = document.getElementById('width');
-const heightInput = document.getElementById('height');
-const minesInput = document.getElementById('mines');
-const smiley = document.getElementById('smiley');
-const gameContainer = document.getElementById('container');
+const boardElement = document.getElementById('board')
+const widthInput = document.getElementById('width')
+const heightInput = document.getElementById('height')
+const minesInput = document.getElementById('mines')
+const smiley = document.getElementById('smiley')
+const gameContainer = document.getElementById('container')
 
 // Initialize the game
 function initGame() {
-    width = parseInt(widthInput.value) || 10;
-    height = parseInt(heightInput.value) || 10;
-    mines = parseInt(minesInput.value) || 15;
+    width = parseInt(widthInput.value) || 10
+    height = parseInt(heightInput.value) || 10
+    mines = parseInt(minesInput.value) || 15
     
     // Validate input
-    if (width < 1) width = 1;
-    if (height < 1) height = 1;
-    const maxMines = width * height - 1;
-    if (mines < 1) mines = 1;
-    if (mines > maxMines) mines = maxMines;
+    if (width < 1) width = 1
+    if (height < 1) height = 1
+    const maxMines = width * height - 1
+    if (mines < 1) mines = 1
+    if (mines > maxMines) mines = maxMines
     
     // Update input values
-    widthInput.value = width;
-    heightInput.value = height;
-    minesInput.value = mines;
+    widthInput.value = width
+    heightInput.value = height
+    minesInput.value = mines
     
     // Reset game state
-    grid = Array(height).fill().map(() => Array(width).fill(0));
-    revealed = Array(height).fill().map(() => Array(width).fill(false));
-    flagged = Array(height).fill().map(() => Array(width).fill(false));
-    gameOver = false;
-    firstClick = true;
+    grid = Array(height).fill().map(() => Array(width).fill(0))
+    revealed = Array(height).fill().map(() => Array(width).fill(false))
+    flagged = Array(height).fill().map(() => Array(width).fill(false))
+    gameOver = false
+    firstClick = true
     chgStatus("🙂")
     
     // Render the board
-    renderBoard();
+    renderBoard()
 
     // Resize the game board
     gameContainer.style.width = `${width * 30 + 48}px`
@@ -87,32 +87,32 @@ function initGame() {
 
 // Place mines after first click to ensure first cell is safe
 function placeMines(firstRow, firstCol) {
-    let minesPlaced = 0;
+    let minesPlaced = 0
     
     while (minesPlaced < mines) {
-        const row = Math.floor(Math.random() * height);
-        const col = Math.floor(Math.random() * width);
+        const row = Math.floor(Math.random() * height)
+        const col = Math.floor(Math.random() * width)
         
         // Skip if it's the first clicked cell or adjacent cells
         if (Math.abs(row - firstRow) <= 1 && Math.abs(col - firstCol) <= 1) {
-            continue;
+            continue
         }
         
         // Skip if there's already a mine
         if (grid[row][col] === -1) {
-            continue;
+            continue
         }
         
         // Place mine
-        grid[row][col] = -1;
-        minesPlaced++;
+        grid[row][col] = -1
+        minesPlaced++
     }
     
     // Calculate numbers for non-mine cells
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
             if (grid[row][col] !== -1) {
-                grid[row][col] = calculateRuleIndex(row, col);
+                grid[row][col] = calculateRuleIndex(row, col)
             }
         }
     }
@@ -120,26 +120,26 @@ function placeMines(firstRow, firstCol) {
 
 // Calculate the rule index for a cell
 function calculateRuleIndex(row, col) {
-    let index = 0;
-    let weight = 1;
+    let index = 0
+    let weight = 1
     
     // Check all 8 neighbors in the specified order
     const neighbors = [
         [row-1, col-1], [row-1, col], [row-1, col+1],
         [row, col+1], [row+1, col+1], [row+1, col],
         [row+1, col-1], [row, col-1]
-    ];
+    ]
     
     for (let i = 0; i < neighbors.length; i++) {
-        const [r, c] = neighbors[i];
+        const [r, c] = neighbors[i]
         // Check if the neighbor is within bounds and is a mine
         if (r >= 0 && r < height && c >= 0 && c < width && grid[r][c] === -1) {
-            index += weight;
+            index += weight
         }
-        weight *= 2;
+        weight *= 2
     }
     
-    return index;
+    return index
 }
 
 // Change expression of status (smiley)
@@ -152,40 +152,40 @@ function chgStatus(expr, override) {
 // Reveal a cell
 function revealCell(row, col) {
     if (gameOver || revealed[row][col] || flagged[row][col]) {
-        return;
+        return
     }
     
     // First click - place mines and ensure safety
     if (firstClick) {
-        firstClick = false;
-        placeMines(row, col);
+        firstClick = false
+        placeMines(row, col)
         // Recalculate the rule index for the first cell after mines are placed
-        grid[row][col] = calculateRuleIndex(row, col);
+        grid[row][col] = calculateRuleIndex(row, col)
     }
     
-    revealed[row][col] = true;
+    revealed[row][col] = true
     
     // Check if it's a mine
     if (grid[row][col] === -1) {
-        gameOver = true;
-        revealAllMines();
-        return;
+        gameOver = true
+        revealAllMines()
+        return
     }
     
     // If it's a zero, reveal adjacent cells
     if (grid[row][col] === 0) {
-        revealAdjacentCells(row, col);
+        revealAdjacentCells(row, col)
     }
     
     // Check for win
     if (checkWin()) {
         chgStatus("😎")
-        gameOver = true;
-        renderBoard();
-        return;
+        gameOver = true
+        renderBoard()
+        return
     }
     
-    renderBoard();
+    renderBoard()
 }
 
 // Reveal adjacent cells for zeros
@@ -194,18 +194,18 @@ function revealAdjacentCells(row, col) {
         [-1, -1], [-1, 0], [-1, 1],
         [0, -1], [0, 1],
         [1, -1], [1, 0], [1, 1]
-    ];
+    ]
     
     for (const [dr, dc] of directions) {
-        const newRow = row + dr;
-        const newCol = col + dc;
+        const newRow = row + dr
+        const newCol = col + dc
         
         if (newRow >= 0 && newRow < height && newCol >= 0 && newCol < width) {
             if (!revealed[newRow][newCol] && !flagged[newRow][newCol]) {
-                revealed[newRow][newCol] = true;
+                revealed[newRow][newCol] = true
                 
                 if (grid[newRow][newCol] === 0) {
-                    revealAdjacentCells(newRow, newCol);
+                    revealAdjacentCells(newRow, newCol)
                 }
             }
         }
@@ -215,11 +215,11 @@ function revealAdjacentCells(row, col) {
 // Toggle flag on a cell
 function toggleFlag(row, col) {
     if (gameOver || revealed[row][col]) {
-        return;
+        return
     }
     
-    flagged[row][col] = !flagged[row][col];
-    renderBoard();
+    flagged[row][col] = !flagged[row][col]
+    renderBoard()
 }
 
 // Check if the player has won
@@ -228,11 +228,11 @@ function checkWin() {
         for (let col = 0; col < width; col++) {
             // If there's a non-mine cell that hasn't been revealed, game is not won
             if (grid[row][col] !== -1 && !revealed[row][col]) {
-                return false;
+                return false
             }
         }
     }
-    return true;
+    return true
 }
 
 // Reveal all mines when game is lost
@@ -240,72 +240,72 @@ function revealAllMines() {
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
             if (grid[row][col] === -1) {
-                revealed[row][col] = true;
+                revealed[row][col] = true
             }
         }
     }
-    renderBoard();
+    renderBoard()
     chgStatus("😵", true)
 }
 
 // Render the game board
 function renderBoard() {
     // Clear the board
-    boardElement.innerHTML = '';
+    boardElement.innerHTML = ''
     
     // Set grid template
-    boardElement.style.gridTemplateColumns = `repeat(${width}, 30px)`;
-    boardElement.style.gridTemplateRows = `repeat(${height}, 30px)`;
+    boardElement.style.gridTemplateColumns = `repeat(${width}, 30px)`
+    boardElement.style.gridTemplateRows = `repeat(${height}, 30px)`
     
     // Create cells
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
-            const cell = document.createElement('div');
-            cell.className = 'cell';
-            cell.dataset.row = row;
-            cell.dataset.col = col;
+            const cell = document.createElement('div')
+            cell.className = 'cell'
+            cell.dataset.row = row
+            cell.dataset.col = col
             
             if (revealed[row][col]) {
-                cell.classList.add('revealed');
+                cell.classList.add('revealed')
                 
                 if (grid[row][col] === -1) {
-                    cell.classList.add('mine');
-                    cell.textContent = "💣";
+                    cell.classList.add('mine')
+                    cell.textContent = "💣"
                 } else {
-                    const ruleIndex = grid[row][col];
-                    cell.textContent = rulekeys[ruleIndex] || '';
+                    const ruleIndex = grid[row][col]
+                    cell.textContent = rulekeys[ruleIndex] || ''
                 }
             } else if (flagged[row][col]) {
-                cell.classList.add('flagged');
+                cell.classList.add('flagged')
             }
             
             // Add click events
             cell.addEventListener('click', () => {
-                revealCell(row, col);
-            });
+                revealCell(row, col)
+            })
 
             cell.addEventListener('mousedown', (e) => {
                 if (e.button === 0) {
                     chgStatus("😮")
                 }
-            });
+            })
 
             cell.addEventListener('mouseup', () => {
                 chgStatus("🙂")
             })
             
             cell.addEventListener('contextmenu', (e) => {
-                e.preventDefault();
-                toggleFlag(row, col);
-            });
+                e.preventDefault()
+                toggleFlag(row, col)
+            })
             
-            boardElement.appendChild(cell);
+            boardElement.appendChild(cell)
         }
     }
 }
 
 // Event listeners
-smiley.addEventListener('click', initGame);
+smiley.addEventListener('click', initGame)
 
 // Initialize the game
-initGame();
+initGame()
