@@ -46,6 +46,7 @@ let mines = 15
 let time = 0
 let tick = false
 let timer
+let mineCount
 
 // DOM elements
 const boardElement = document.getElementById('board')
@@ -55,13 +56,13 @@ const minesInput = document.getElementById('mines')
 const smiley = document.getElementById('smiley')
 const gameContainer = document.getElementById('container')
 const timeDisplay = document.getElementById('time')
+const mineDisplay = document.getElementById('mine-count')
 
 // Initialize the game
 function initGame() {
     width = parseInt(widthInput.value) || 10
     height = parseInt(heightInput.value) || 10
     mines = parseInt(minesInput.value) || 15
-
     
     // Validate input
     if (width < 1) width = 1
@@ -75,6 +76,8 @@ function initGame() {
     heightInput.value = height
     minesInput.value = mines
     
+    mineCount = mines
+    
     // Reset game state
     grid = Array(height).fill().map(() => Array(width).fill(0))
     revealed = Array(height).fill().map(() => Array(width).fill(false))
@@ -84,6 +87,7 @@ function initGame() {
     time = 0
     tick = false
     timeDisplay.innerHTML = "000"
+    mineDisplay.innerHTML = "010"
     clearInterval(timer)
     chgStatus("🙂")
     
@@ -229,11 +233,17 @@ function revealAdjacentCells(row, col) {
 
 // Toggle flag on a cell
 function toggleFlag(row, col) {
-    if (gameOver || revealed[row][col]) {
+    if (gameOver || revealed[row][col] || (mineCount < 1 && !flagged[row][col])) {
         return
     }
     
     flagged[row][col] = !flagged[row][col]
+    if (flagged[row][col]) {
+        mineCount--
+    } else {
+        mineCount++
+    }
+    mineDisplay.innerHTML = "0".repeat(3 - `${mineCount}`.length) + mineCount
     renderBoard()
 }
 
