@@ -58,10 +58,12 @@ const gameContainer = document.getElementById('container')
 const timeDisplay = document.getElementById('time')
 const mineDisplay = document.getElementById('mine-count')
 const customGame = document.getElementById('custom-game')
+const gameMenu = document.getElementById('game-menu')
 
 // Initialize UI
 window.onload = () => {
     customGame.style.display = "none"
+    gameMenu.style.display = "none"
 }
 
 // Initialize the game
