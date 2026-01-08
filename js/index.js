@@ -81,10 +81,10 @@ window.onload = () => {
 }
 
 // Initialize the game
-function initGame() {
-    width = parseInt(widthInput.value) || 10
-    height = parseInt(heightInput.value) || 10
-    mines = parseInt(minesInput.value) || 15
+window.initGame = function (targetWidth, targetHeight, targetMines) {
+    width = targetWidth || (parseInt(widthInput.value) || 10)
+    height = targetHeight || (parseInt(heightInput.value) || 10)
+    mines = targetMines || (parseInt(minesInput.value) || 15)
     
     // Validate input
     if (width < 1) width = 1
@@ -350,6 +350,10 @@ function renderBoard() {
             boardElement.appendChild(cell)
         }
     }
+}
+
+window.setBoard = function (targetWidth, targetHeight, targetMines) {
+    initGame(targetWidth, targetHeight, targetMines)
 }
 
 // Event listeners
