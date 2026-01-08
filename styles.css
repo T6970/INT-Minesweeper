@@ -145,6 +145,7 @@ button:active {
      background-color: #c0c0c0;
      border: 2px outset #c0c0c0;
      padding: 5px;
+     position: relative;
 }
 
 #smiley {

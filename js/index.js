@@ -59,11 +59,25 @@ const timeDisplay = document.getElementById('time')
 const mineDisplay = document.getElementById('mine-count')
 const customGame = document.getElementById('custom-game')
 const gameMenu = document.getElementById('game-menu')
+let gameMenuPop = false
 
 // Initialize UI
 window.onload = () => {
     customGame.style.display = "none"
     gameMenu.style.display = "none"
+    gameMenu.style.left = "10px"
+    gameMenu.style.top = "10px"
+    const gameMenuButton = document.getElementById('game')
+    container.addEventListener("click", () => {
+        if (gameMenuPop) {
+            gameMenu.style.display = "none"
+            gameMenuPop = false
+        }
+    })
+    gameMenuButton.addEventListener("click", () => {
+        gameMenu.style.display = ""
+        setTimeout(() => {gameMenuPop = true}, 100)
+    })
 }
 
 // Initialize the game
