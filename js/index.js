@@ -47,6 +47,7 @@ let time = 0
 let tick = false
 let timer
 let mineCount
+let difficulty = 0
 
 // DOM elements
 const boardElement = document.getElementById('board')
@@ -81,10 +82,28 @@ window.onload = () => {
 }
 
 // Initialize the game
-window.initGame = function (targetWidth, targetHeight, targetMines) {
-    width = targetWidth || (parseInt(widthInput.value) || 10)
-    height = targetHeight || (parseInt(heightInput.value) || 10)
-    mines = targetMines || (parseInt(minesInput.value) || 15)
+window.initGame = function () {
+    switch (difficulty) {
+        case 0:
+            width = 8
+            height = 8
+            mines = 10
+            break
+        case 1:
+            width = 16
+            height = 16
+            mines = 40
+            break
+        case 2:
+            width = 30
+            height = 16
+            mines = 99
+            break
+        case 3:
+            width = parseInt(widthInput.value) || 10
+            height = parseInt(heightInput.value) || 10
+            mines = parseInt(minesInput.value) || 15
+    }
     
     // Validate input
     if (width < 1) width = 1
@@ -352,9 +371,12 @@ function renderBoard() {
     }
 }
 
-window.setBoard = function (targetWidth, targetHeight, targetMines) {
-    initGame(targetWidth, targetHeight, targetMines)
+// Sets difficulty to 0: easy, 1: intermediate or 2: advanced
+window.setDifficulty = function (targetDifficulty) {
+    difficulty = targetDifficulty
+    initGame()
 }
+
 
 // Event listeners
 smiley.addEventListener('click', initGame)
