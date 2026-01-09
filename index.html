@@ -28,6 +28,7 @@
         <button onclick="setDifficulty(0)">Begineer</button>
         <button onclick="setDifficulty(1)">Intermediate</button>
         <button onclick="setDifficulty(2)">Advanced</button>
+        <button onclick="document.getElementById('custom-game').style.display=''">Custom...</button>
     </div>
 
     <div class="game-container" id="custom-game">
@@ -43,7 +44,8 @@
             <div>
                 <label>Mines: </label>
                 <input type="number" id="mines" min="1" value="10">
-            </div>        
+            </div>
+            <button onclick="setDifficulty(3);document.getElementById('custom-game').style.display='none'">Ok</button>
         </div>
     </div>
 
