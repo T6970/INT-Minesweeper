@@ -377,6 +377,11 @@ window.setDifficulty = function (targetDifficulty) {
     initGame()
 }
 
+window.hideGameMenu = function () {
+    document.getElementById('game-menu').style.display='none'
+    gameMenuPop = "false"
+}
+
 
 // Event listeners
 smiley.addEventListener('click', initGame)

@@ -25,10 +25,10 @@
     <div class="context-menu" id="game-menu">
         <button onclick="initGame()">New</button>
         <hr>
-        <button onclick="setDifficulty(0); gameMenuPop = false">Begineer</button>
-        <button onclick="setDifficulty(1); gameMenuPop = false">Intermediate</button>
-        <button onclick="setDifficulty(2); gameMenuPop = false">Advanced</button>
-        <button onclick="document.getElementById('custom-game').style.display=''; document.getElementById('game-menu').style.display='none'; gameMenuPop = false">Custom...</button>
+        <button onclick="setDifficulty(0); hideGameMenu()">Begineer</button>
+        <button onclick="setDifficulty(1); hideGameMenu()">Intermediate</button>
+        <button onclick="setDifficulty(2); hideGameMenu()">Advanced</button>
+        <button onclick="document.getElementById('custom-game').style.display=''; hideGameMenu()">Custom...</button>
     </div>
 
     <div class="game-container" id="custom-game">
