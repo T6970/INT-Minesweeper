@@ -48,6 +48,8 @@ let tick = false
 let timer
 let mineCount
 let difficulty = 0
+let gameMenuPop = false
+let clickPos = {row: -1, col: -1}
 
 // DOM elements
 const boardElement = document.getElementById('board')
@@ -60,7 +62,6 @@ const timeDisplay = document.getElementById('time')
 const mineDisplay = document.getElementById('mine-count')
 const customGame = document.getElementById('custom-game')
 const gameMenu = document.getElementById('game-menu')
-let gameMenuPop = false
 
 // Initialize UI
 window.onload = () => {
@@ -205,6 +206,10 @@ function chgStatus(expr, override) {
 
 // Reveal a cell
 function revealCell(row, col) {
+    // sets position of most recent click
+    clickPos.row = row
+    clickPos.col = col
+
     if (gameOver || revealed[row][col] || flagged[row][col]) {
         return
     }
@@ -227,7 +232,7 @@ function revealCell(row, col) {
     // Check if it's a mine
     if (grid[row][col] === -1) {
         gameOver = true
-        revealAllMines()
+        revealAllMines(row, col)
         return
     }
     
@@ -302,7 +307,7 @@ function checkWin() {
 }
 
 // Reveal all mines when game is lost
-function revealAllMines() {
+function revealAllMines(clickRow, clickCol) {
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
             if (grid[row][col] === -1) {
@@ -310,6 +315,7 @@ function revealAllMines() {
             }
         }
     }
+    
     clearInterval(timer)
     renderBoard()
     chgStatus("😵", true)
@@ -344,6 +350,10 @@ function renderBoard() {
                 }
             } else if (flagged[row][col]) {
                 cell.classList.add('flagged')
+            }
+
+            if (gameOver && row === clickPos.row && col === clickPos.col) {
+                cell.style.backgroundColor = '#ff0000'
             }
             
             // Add click events
@@ -381,7 +391,6 @@ window.hideGameMenu = function () {
     document.getElementById('game-menu').style.display='none'
     gameMenuPop = "false"
 }
-
 
 // Event listeners
 smiley.addEventListener('click', initGame)
