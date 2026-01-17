@@ -109,12 +109,10 @@ button:active {
 
 .cell.mine {
     background-color: #c0c0c0;
-    border: 2px outset #c0c0c0;
 }
 
 .cell.mine:active {
     background-color: #c0c0c0;
-    border: 2px outset #c0c0c0;
 }
 
 .cell.flagged::after {

@@ -310,8 +310,11 @@ function checkWin() {
 function revealAllMines(clickRow, clickCol) {
     for (let row = 0; row < height; row++) {
         for (let col = 0; col < width; col++) {
-            if (grid[row][col] === -1) {
+            if (grid[row][col] === -1 && !flagged[row][col]) {
                 revealed[row][col] = true
+            }
+            if (flagged[row][col] && grid[row][col] !== -1) {
+                grid[row][col] = -2
             }
         }
     }
@@ -350,7 +353,11 @@ function renderBoard() {
                     cell.textContent = rulekeys[ruleIndex] || ''
                 }
             } else if (flagged[row][col]) {
-                cell.classList.add('flagged')
+                if (grid[row][col] === -2) {
+                    cell.textContent = "❌"
+                } else {
+                    cell.classList.add('flagged')
+                }
             }
 
             if (timer === null && gameOver && row === clickPos.row && col === clickPos.col) {
