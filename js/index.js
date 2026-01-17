@@ -355,6 +355,8 @@ function renderBoard() {
             } else if (flagged[row][col]) {
                 if (grid[row][col] === -2) {
                     cell.textContent = "❌"
+                    cell.style.backgroundColor = '#c0c0c0'
+                    cell.style.border = '1px solid #808080'
                 } else {
                     cell.classList.add('flagged')
                 }
