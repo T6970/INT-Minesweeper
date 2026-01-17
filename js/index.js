@@ -317,6 +317,7 @@ function revealAllMines(clickRow, clickCol) {
     }
     
     clearInterval(timer)
+    timer = null
     renderBoard()
     chgStatus("😵", true)
 }
@@ -352,7 +353,7 @@ function renderBoard() {
                 cell.classList.add('flagged')
             }
 
-            if (gameOver && row === clickPos.row && col === clickPos.col) {
+            if (timer === null && gameOver && row === clickPos.row && col === clickPos.col) {
                 cell.style.backgroundColor = '#ff0000'
             }
             
