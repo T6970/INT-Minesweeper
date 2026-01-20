@@ -34,6 +34,23 @@ const rulekeys = [
     "i", "a", "c", "c", "a", "e", "c", "8"
 ]
 
+const rulekeyColors = {
+    c: '0000ff',
+    e: '008800',
+    a: 'cc00cc',
+    k: 'ff0000',
+    r: 'cc8800',
+    n: '00cccc',
+    j: '00ff00',
+    i: 'aaaa00',
+    q: '5588aa',
+    y: '888888',
+    z: '55aa00',
+    w: '5500aa',
+    t: '440022',
+    '8': '000000'
+}
+
 // Game state variables
 let grid = []
 let revealed = []
@@ -351,6 +368,7 @@ function renderBoard() {
                 } else {
                     const ruleIndex = grid[row][col]
                     cell.textContent = rulekeys[ruleIndex] || ''
+                    cell.style.color = `#${rulekeyColors[rulekeys[ruleIndex]]}`
                 }
             } else if (flagged[row][col]) {
                 if (grid[row][col] === -2) {
