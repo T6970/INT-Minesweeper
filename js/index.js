@@ -41,7 +41,7 @@ const rulekeyColors = {
     k: 'ff0000',
     r: 'cc8800',
     n: '00cccc',
-    j: '00ff00',
+    j: '00cc00',
     i: 'aaaa00',
     q: '5588aa',
     y: '888888',
