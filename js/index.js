@@ -146,7 +146,7 @@ window.initGame = function () {
     time = 0
     tick = false
     timeDisplay.innerHTML = "000"
-    mineDisplay.innerHTML = "010"
+    mineDisplay.innerHTML = "0".repeat(3 - `${mineCount}`.length) + mineCount
     clearInterval(timer)
     chgStatus("🙂")
     
