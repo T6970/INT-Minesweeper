@@ -79,11 +79,13 @@ const timeDisplay = document.getElementById('time')
 const mineDisplay = document.getElementById('mine-count')
 const customGame = document.getElementById('custom-game')
 const gameMenu = document.getElementById('game-menu')
+const howToPlay = document.getElementById('how-to-play')
 
 // Initialize UI
 window.onload = () => {
     customGame.style.display = "none"
     gameMenu.style.display = "none"
+    howToPlay.style.display = "none"
     gameMenu.style.left = "10px"
     gameMenu.style.top = "10px"
     const gameMenuButton = document.getElementById('game')
