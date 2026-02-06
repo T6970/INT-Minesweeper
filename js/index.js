@@ -130,7 +130,7 @@ window.initGame = function () {
     // Validate input
     if (width < 1) width = 1
     if (height < 1) height = 1
-    const maxMines = width * height - 1
+    const maxMines = width * height - 9
     if (mines < 1) mines = 1
     if (mines > maxMines) mines = maxMines
     
