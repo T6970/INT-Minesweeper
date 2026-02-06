@@ -267,6 +267,7 @@ function revealCell(row, col) {
         chgStatus("😎")
         gameOver = true
         clearInterval(timer)
+        mineDisplay.innerText = "000"
         renderBoard()
         return
     }
