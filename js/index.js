@@ -66,6 +66,7 @@ let timer
 let mineCount
 let difficulty = 0
 let gameMenuPop = false
+let helpMenuPop = false
 let clickPos = {row: -1, col: -1}
 
 // DOM elements
@@ -91,15 +92,24 @@ window.onload = () => {
     gameMenu.style.left = "10px"
     gameMenu.style.top = "10px"
     const gameMenuButton = document.getElementById('game')
+    const helpMenuButton = document.getElementById('help')
     container.addEventListener("click", () => {
         if (gameMenuPop) {
             gameMenu.style.display = "none"
             gameMenuPop = false
         }
+        if (helpMenuPop) {
+            helpMenu.style.display = "none"
+            helpMenuPop = false
+        }
     })
     gameMenuButton.addEventListener("click", () => {
         gameMenu.style.display = ""
         setTimeout(() => {gameMenuPop = true}, 100)
+    })
+    helpMenuButton.addEventListener("click", () => {
+        helpMenu.style.display = ""
+        setTimeout(() => {helpMenuPop = true}, 100)
     })
 }
 
