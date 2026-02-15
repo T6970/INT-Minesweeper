@@ -156,3 +156,8 @@ button:active {
     padding-left: 2px;
     margin: 10px auto;
 }
+
+#how-to-play {
+    display: flex;
+    flex-direction: column;
+}
