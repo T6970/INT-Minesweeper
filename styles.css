@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: 'Courier New', monospace;
+    font-family: 'Courier New', 'Noto Mono', monospace;
 }
 
 body {
@@ -150,6 +150,7 @@ button:active {
 }
 
 #smiley {
+    font-family: 'Noto Color Emoji';
     width: 45px;
     height: 45px;
     font-size: 30px;
