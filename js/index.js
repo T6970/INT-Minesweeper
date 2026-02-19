@@ -1,4 +1,5 @@
 // Defines what letters should each configuration (anisotropic) correspond to
+// Configurations are defined so that rotation and reflection doesn't matter (isotropic)
 const rulekeys = [
     "", "c", "e", "a", "c", "c", "a", "i",
     "e", "k", "e", "j", "a", "n", "a", "a",
