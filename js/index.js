@@ -1,4 +1,4 @@
-// The provided rulekeys array
+// Defines what letters should each configuration (anisotropic) correspond to
 const rulekeys = [
     "", "c", "e", "a", "c", "c", "a", "i",
     "e", "k", "e", "j", "a", "n", "a", "a",
@@ -34,6 +34,7 @@ const rulekeys = [
     "i", "a", "c", "c", "a", "e", "c", "8"
 ]
 
+// Colors for each letter
 const rulekeyColors = {
     c: '0000ff',
     e: '008800',
@@ -346,7 +347,7 @@ function revealAllMines(clickRow, clickCol) {
                 revealed[row][col] = true
             }
             if (flagged[row][col] && grid[row][col] !== -1) {
-                grid[row][col] = -2
+                grid[row][col] = -2 // -2 means that the cell is false positive
             }
         }
     }
